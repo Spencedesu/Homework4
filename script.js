@@ -6,6 +6,7 @@
 // var remainingTime = 75;
 // var questionIndex = 0;
 var timer = document.getElementById("timer");
+var feedback = document.getElementById("QuestionsContainer")
 
 
 
@@ -47,10 +48,8 @@ function start() {
   $("#Quiz").on("click", function(){
     setTime();
     $(".jumbotron").css("display", "none");
-    $("#Question").css("display","block");
-    // alert("let the games Begin!");
-    // alert ("counter is now: "); // can i grab onto this with $
-    // questionIndex += 1;
+    $("#QuestionsContainer", "#answers1").css("display","block");
+    
     var questions = document.getElementById("QuestionsContainer")
     .setAttribute("class", "questionstuff");
     
@@ -67,18 +66,30 @@ function start() {
 
       Question1();
 
+      
+
       function Question1() {
         var questionsElement = document.getElementById("questionsElement");
         questionsElement.textContent = quizQuestions[0]["title"];
         console.log(quizQuestions[0]);
-        var answers = document.getElementById("answersElement");
+        console.log(quizQuestions[0]["choices"])
+        
+        var answers1 = document.getElementById("answers1");
+        console.log(answers1);
         for (var i = 0; i < quizQuestions[0]["choices"].length; i++) {
             var list = document.createElement("li");
-            list.textContent = questions[0]["choices"][i];
-            list.setAttribute("class", "btn");
-            answers.appendChild(list); 
+             console.log(list)
+            list.textContent = quizQuestions[0]["choices"][i];
+
+            list.setAttribute("class", "btn btn-primary");
+            answers1.appendChild(list); 
+            console.log(answers1);
+
         }
+ 
       }
+
+ 
     }
 })} 
   
