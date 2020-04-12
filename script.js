@@ -1,25 +1,13 @@
 
-var quizContainer = $("Quiz");
-var resultsContainer = $("Results");
-var submitButton = $("Submit");
-var timer = document.getElementById("timer")
-var qChoices = $("#Question");
-var remainingTime = 75;
-var questionIndex = 0;
+// var quizContainer = $("Quiz");
+// var resultsContainer = $("Results");
+// var submitButton = $("Submit");
+// var qChoices = $("#Question");
+// var remainingTime = 75;
+// var questionIndex = 0;
+var timer = document.getElementById("timer");
 
-function startTime() {
-  $("#Quiz").on("click", function(){
-    
-  })
-  var Interval = setInterval(function() {
-    counter--;
-    timeLeft.textContent = counter;
-    if(secondsLeft === 0) {
-      clearInterval(Interval);
-    }
-  
-  }, 1000);
-  }
+
 
 var quizQuestions = [
   {
@@ -51,32 +39,48 @@ var quizQuestions = [
   }
   ];
 
-$("#Highscores").on("click", function(){
+  // function startQuiz() {
+  //   $("#Quiz").on("click", function)
+  // }
+
+function start() {
+  $("#Quiz").on("click", function(){
+    setTime();
+    $(".jumbotron").css("display", "none");
+    $("#Question").css("display","block");
+    // alert("let the games Begin!");
+    // alert ("counter is now: "); // can i grab onto this with $
+    // questionIndex += 1;
+    var questions = document.getElementById("QuestionsContainer")
+    .setAttribute("class", "questionstuff");
+    
+    function setTime() {
+      var counter = 60;
+      var Interval = setInterval(function() {
+        counter--;
+        timer.textContent = "Remaining: " + counter;
+
+        if(counter === 0) {
+          clearInterval(Interval);
+        }
+      }, 1000);
+
+      Question1();
+
+      function Question1() {
+        var questionsElement = document.getElementById("questionsElement");
+        questionsElement.textContent = quizQuestions[0]["title"];
+        console.log(quizQuestions[0]);
+        var answers = document.getElementById("answersElement");
+        for (var i = 0; i < quizQuestions[0]["choices"].length; i++) {
+            var list = document.createElement("li");
+            list.textContent = questions[0]["choices"][i];
+            list.setAttribute("class", "btn");
+            answers.appendChild(list); 
+        }
+      }
+    }
+})} 
   
-  alert("heyooo");
-  //$(this).html("High Scores = " + counter);
-  //At this point "highscores" variable is just something that
-  //will equate at some point to the score from game or something
 
-});
-
-
-
-$("#Quiz").on("click", function(){
-  $(".jumbotron").css("display", "none");
-  $("#Question").css("display","block");
-  alert("let the games Begin!");
-  alert ("counter is now: "); // can i grab onto this with $
-  questionIndex += 1;
-  
-  for( var i=0; i <quizQuestions.length; i++) {
-    $("#Question").text(quizQuestions[i].title);
-  }
-  for(var i=0; i <quizQuestions.length; i++) {
-    $("#Question").text(quizQuestions[i].choices);
-  }
-});
-
-
-$("#Submit").on("click",showResults)
-
+start();
